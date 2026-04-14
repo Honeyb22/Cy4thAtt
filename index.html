@@ -4,9 +4,9 @@ BY:- HONEY SONI (CY14)
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BTIRT Attendance System | Production Node</title>
+    <title>BTIRT Attendance | Secure Node</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- html2canvas is required for capturing the DOM as an image artifact -->
+    <!-- Forensic capture library: Allows DOM-to-Image serialization -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&family=JetBrains+Mono:wght@700&display=swap" rel="stylesheet">
     <style>
@@ -14,12 +14,14 @@ BY:- HONEY SONI (CY14)
         .mono { font-family: 'JetBrains Mono', monospace; }
         .drop-shadow-glow { filter: drop-shadow(0 0 10px rgba(16, 185, 129, 0.4)); }
         
-        /* Custom Scrollbar */
+        /* Custom Scrollbar for Terminal-style feel */
         ::-webkit-scrollbar { width: 4px; }
         ::-webkit-scrollbar-track { background: transparent; }
         ::-webkit-scrollbar-thumb { background: #1e293b; border-radius: 10px; }
 
-        /* Card Specifics - Locked for forensic consistency */
+        /* FIXED FORENSIC CARD SIZE (360x640) 
+           In digital forensics, standardized evidence sizes ensure consistent analysis.
+        */
         .id-card {
             width: 360px;
             height: 640px;
@@ -27,24 +29,25 @@ BY:- HONEY SONI (CY14)
             background-size: 12px 12px;
             background-color: white;
             border: 2px solid black;
+            flex-shrink: 0;
         }
     </style>
 </head>
 <body class="p-4 md:p-8">
 
-    <!-- HEADER -->
+    <!-- DASHBOARD HEADER -->
     <header class="max-w-7xl mx-auto mb-8 flex flex-col md:flex-row justify-between items-center bg-slate-900/40 backdrop-blur-xl p-6 rounded-[2rem] border border-white/5 shadow-2xl relative overflow-hidden">
         <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-emerald-500 via-cyan-500 to-indigo-500 opacity-50"></div>
         <div class="flex items-center gap-6">
             <div class="bg-gradient-to-br from-slate-800 to-slate-950 p-4 rounded-2xl border border-white/10 shadow-inner">
-                <svg xmlns="http://www.w3.org/2000/svg" class="w-8 h-8 text-emerald-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m4 6 8-4 8 4v10l-8 4-8-4Z"/><path d="m12 22 8-4V6l-8 4V22Z"/><path d="m12 10 8-4-8-4-8 4Z"/><path d="m8 12 8-4"/></svg>
+                <svg xmlns="http://www.w3.org/2000/svg" class="w-8 h-8 text-emerald-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
             </div>
             <div>
                 <h1 class="text-3xl font-black tracking-tight text-white uppercase">BTIRT COLLEGE</h1>
                 <div class="flex items-center gap-3 mt-1.5 text-[10px] font-bold uppercase tracking-widest text-slate-500">
-                    <span class="text-emerald-500/80">Cyber Security</span>
+                    <span class="text-emerald-500/80">Cyber Security Ops</span>
                     <span>•</span>
-                    <span>4th Semester Node</span>
+                    <span>4th Sem Node</span>
                 </div>
             </div>
         </div>
@@ -57,16 +60,16 @@ BY:- HONEY SONI (CY14)
 
     <main class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
         
-        <!-- CONTROLS (LEFT) -->
+        <!-- SECTION 1: SYSTEM CONTROLS (LEFT) -->
         <section class="lg:col-span-6 space-y-6">
             <div class="bg-slate-900/60 backdrop-blur-md p-8 rounded-[2.5rem] border border-white/5 shadow-xl">
                 <h2 class="text-xs font-black text-emerald-500 uppercase tracking-[0.3em] mb-6 flex items-center gap-3">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+                    <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M3 12h1m8-9v1m8 8h1m-9 8v1M5.6 5.6l.7.7m12.1-.7-.7.7m0 11.4.7.7m-12.1-.7-.7.7"/></svg>
                     One Faculty Config
                 </h2>
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <div>
-                        <label class="text-[10px] font-black text-slate-500 uppercase ml-2 mb-1 block">Current Day</label>
+                        <label class="text-[10px] font-black text-slate-500 uppercase ml-2 mb-1 block">Operational Day</label>
                         <select id="day-select" class="w-full bg-slate-950 border border-white/10 rounded-2xl px-4 py-3 text-emerald-400 outline-none text-sm cursor-pointer hover:border-emerald-500/50 transition-all">
                             <option value="MON">MON</option>
                             <option value="TUE">TUE</option>
@@ -77,37 +80,39 @@ BY:- HONEY SONI (CY14)
                         </select>
                     </div>
                     <div>
-                        <label class="text-[10px] font-black text-slate-500 uppercase ml-2 mb-1 block">Faculty</label>
+                        <label class="text-[10px] font-black text-slate-500 uppercase ml-2 mb-1 block">Assigned Faculty</label>
                         <select id="teacher-select" class="w-full bg-slate-950 border border-white/10 rounded-2xl px-4 py-3 text-emerald-400 outline-none text-sm cursor-pointer hover:border-emerald-500/50 transition-all">
-                            <option value="">-- SELECT --</option>
+                            <option value="">-- IDENTITY --</option>
                         </select>
                     </div>
                     <div class="md:col-span-2">
-                        <label class="text-[10px] font-black text-slate-500 uppercase ml-2 mb-1 block">Lecture Slot</label>
+                        <label class="text-[10px] font-black text-slate-500 uppercase ml-2 mb-1 block">Temporal Slot</label>
                         <select id="slot-select" class="w-full bg-slate-950 border border-white/10 rounded-2xl px-4 py-3 text-emerald-400 outline-none text-sm cursor-pointer hover:border-emerald-500/50 transition-all">
-                            <option value="" disabled>-- SELECT TIME SLOT --</option>
+                            <option value="" disabled>-- SELECT PHASE --</option>
                         </select>
                         <button id="resync-btn" class="hidden mt-3 items-center gap-2 text-[9px] text-indigo-400 font-black uppercase tracking-widest hover:text-indigo-300">
-                             // Restore Auto-Calibration
+                             // Restore Auto-Sync Engine
                         </button>
                     </div>
                 </div>
             </div>
 
+            <!-- STUDENT REGISTRY (2 NAMES PER LINE) -->
             <div class="bg-slate-900/60 backdrop-blur-md p-8 rounded-[2.5rem] border border-white/5">
                 <div class="flex justify-between items-center mb-6">
-                    <h2 class="text-xs font-black text-emerald-500 uppercase tracking-[0.3em]">Students' Names</h2>
-                    <div id="active-count" class="bg-emerald-500 text-slate-950 text-[10px] font-black px-3 py-1 rounded-full uppercase">0 Active</div>
+                    <h2 class="text-xs font-black text-emerald-500 uppercase tracking-[0.3em]">Personnel Name</h2>
+                    <div id="active-count" class="bg-emerald-500 text-slate-950 text-[10px] font-black px-3 py-1 rounded-full uppercase shadow-lg shadow-emerald-500/20">0 Verified</div>
                 </div>
                 <div id="student-grid" class="grid grid-cols-2 gap-3">
-                    <!-- Students injected here -->
+                    <!-- Students dynamically injected -->
                 </div>
             </div>
         </section>
 
-        <!-- IDENTITY CARD PREVIEW (RIGHT) -->
+        <!-- SECTION 2: FORENSIC IDENTITY CARD PREVIEW (RIGHT) -->
         <section class="lg:col-span-6 flex flex-col gap-6 items-center">
             
+            <!-- FIXED 360x640 CAPTURE AREA -->
             <div id="export-card" class="id-card rounded-2xl p-4 relative overflow-hidden flex flex-col shadow-2xl">
                 <!-- Header -->
                 <div class="relative z-10 text-center mb-3 border-b-2 border-black pb-2">
@@ -120,74 +125,84 @@ BY:- HONEY SONI (CY14)
                     </div>
                 </div>
 
-                <div class="relative z-10 space-y-2 flex-grow overflow-hidden">
+                <div class="relative z-10 space-y-2 flex-grow overflow-hidden flex flex-col">
                     <div class="grid grid-cols-12 gap-2">
+                        <!-- Date Block -->
                         <div class="col-span-8 border-2 border-black rounded-lg p-2 bg-white flex justify-between items-center shadow-[2px_2px_0px_#000]">
                             <div class="overflow-hidden">
                                 <p class="text-[7px] font-black text-black uppercase">Attendance Date</p>
-                                <p id="card-date" class="text-black font-black text-sm tracking-tighter italic truncate">14 April 2026</p>
+                                <p id="card-date" class="text-black font-black text-sm tracking-tighter italic truncate">-- -- --</p>
                             </div>
                             <div class="border-2 border-black px-1.5 py-0.5 bg-white">
-                                <span id="card-day" class="text-black font-black text-xs uppercase italic">TUE</span>
+                                <span id="card-day" class="text-black font-black text-xs uppercase italic">---</span>
                             </div>
                         </div>
+                        <!-- Lecture Number -->
                         <div class="col-span-4 bg-black border-2 border-black rounded-lg p-2 flex flex-col items-center justify-center text-white">
                             <p class="text-[7px] font-black uppercase opacity-70">Lecture</p>
                             <p id="card-lecture-num" class="text-lg font-black italic">#00</p>
                         </div>
                     </div>
 
+                    <!-- Timing Window -->
                     <div class="border-2 border-black rounded-lg p-2 bg-white shadow-[2px_2px_0px_#000]">
                         <p class="text-[7px] font-black text-black uppercase text-center border-b border-black pb-0.5">Lecture Timing</p>
                         <p id="card-timing" class="text-black font-black text-sm mono text-center tracking-tighter mt-0.5 italic">--- OFFLINE ---</p>
                     </div>
 
+                    <!-- Faculty Identification -->
                     <div class="border-2 border-black rounded-lg p-2.5 bg-white shadow-[2px_2px_0px_#000]">
                         <p class="text-[7px] font-black text-black uppercase mb-0.5">Authorised Faculty</p>
-                        <p id="card-faculty" class="text-black font-black text-lg uppercase tracking-tighter italic leading-none">AWAITING_ID</p>
+                        <p id="card-faculty" class="text-black font-black text-lg uppercase tracking-tighter italic leading-none truncate">AWAITING_ID</p>
                     </div>
 
+                    <!-- Module/Subject -->
                     <div class="border-2 border-black rounded-lg p-1.5 bg-white w-2/3 shadow-[3px_3px_0px_#000]">
-                        <p id="card-subject" class="text-black font-black text-xs uppercase italic tracking-tighter truncate">---</p>
+                        <p id="card-subject" class="text-black font-black text-[10px] uppercase italic tracking-tighter truncate">---</p>
                     </div>
 
-                    <div class="border-2 border-black rounded-lg p-3 bg-white min-h-[180px] flex flex-col shadow-[2px_2px_0px_#000]">
+                    <!-- Log Stream (Personnel List) -->
+                    <div class="border-2 border-black rounded-lg p-3 bg-white flex-grow flex flex-col shadow-[2px_2px_0px_#000] overflow-hidden">
                         <div id="card-students" class="space-y-0.5 flex-grow">
-                            <!-- Selected students injected here -->
+                            <div class="h-full flex items-center justify-center opacity-20 py-10">
+                                <p class="text-black font-black text-[9px] uppercase italic">Awaiting Log Registry...</p>
+                            </div>
                         </div>
                     </div>
 
-                    <div class="border-2 border-black rounded-xl p-2 bg-white shadow-[4px_4px_0px_#000]">
-                        <p id="card-clock" class="text-2xl font-black text-black mono text-center tracking-tighter italic">00:00:00 <span class="text-sm">PM</span></p>
+                    <!-- Temporal Snapshot (Clock) -->
+                    <div class="border-2 border-black rounded-xl p-2 bg-white shadow-[4px_4px_0px_#000] mt-auto">
+                        <p id="card-clock" class="text-2xl font-black text-black mono text-center tracking-tighter italic tabular-nums">00:00:00 <span class="text-sm">PM</span></p>
                     </div>
                 </div>
 
+                <!-- Forensic Signature -->
                 <div class="mt-2 pt-2 border-t-2 border-black flex justify-between items-center">
                     <p class="text-black font-black text-xs italic tracking-tighter uppercase">BY - <span class="text-emerald-600">Honey Soni</span></p>
                     <div class="bg-black text-white px-2 py-0.5 font-black italic text-[9px]">CY (14)</div>
                 </div>
             </div>
 
+            <!-- ACTION TRIGGERS -->
             <div class="flex gap-4 w-full max-w-[360px]">
-                <!-- Updated Save Image logic for direct download -->
-                <button id="download-btn" onclick="saveAsImage()" class="flex-1 bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-black py-4 rounded-2xl flex items-center justify-center gap-2 transition-all shadow-xl uppercase text-[10px] tracking-widest">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
-                    Save Image
+                <button id="download-btn" onclick="saveAsImage()" class="flex-1 bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-black py-4 rounded-2xl flex items-center justify-center gap-2 transition-all active:scale-95 shadow-xl uppercase text-[10px] tracking-widest group">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 group-hover:-translate-y-1 transition-transform" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                    Save Artifact
                 </button>
-                <button onclick="alert('Ready to share. Take a screenshot or use your device share options.')" class="flex-1 bg-white text-black font-black py-4 rounded-2xl flex items-center justify-center gap-2 hover:bg-slate-100 transition-all shadow-xl uppercase text-[10px] tracking-widest border-2 border-black">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg>
-                    Share Card
+                <button onclick="alert('Verification Node Active. Please use device screen sharing options for transmission.')" class="flex-1 bg-white text-black font-black py-4 rounded-2xl flex items-center justify-center gap-2 hover:bg-slate-100 transition-all active:scale-95 shadow-xl uppercase text-[10px] tracking-widest border-2 border-black">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg>
+                    Share Log
                 </button>
             </div>
         </section>
     </main>
 
-    <footer class="text-center mt-10 opacity-30 py-8">
-        <p class="text-[9px] font-black uppercase tracking-[0.6em]">Tactical Web Tool: Honey Soni • CY 4th Semester</p>
+    <footer class="text-center mt-12 opacity-20 py-8 border-t border-white/5">
+        <p class="text-[9px] font-black uppercase tracking-[0.8em]">System Developed By Honey Soni • CYBER SECURITY DEPT • BTIRT</p>
     </footer>
 
     <script>
-        // --- DATA ---
+        // --- SECURE DATA STORE ---
         const schedule = {
             "MON": ["SK", "DRPB", "DRPB", "LUNCH", "MS", "AJ", "JK"],
             "TUE": ["DRPB", "AU", "JK", "LUNCH", "AV", "AV", "AV"],
@@ -206,7 +221,7 @@ BY:- HONEY SONI (CY14)
             { id: "AV", name: "Akash Verma Sir", subject: "Python + Lab" },
             { id: "MS", name: "Manish Shrivastava Sir", subject: "Communication Skills" },
             { id: "MENTOR", name: "Library / Mentor", subject: "Research" },
-            { id: "LUNCH", name: "Lunch Break", subject: "System Idle" }
+            { id: "LUNCH", name: "Lunch Break", subject: "System Downtime" }
         ];
 
         const slots = [
@@ -219,23 +234,26 @@ BY:- HONEY SONI (CY14)
             { id: 6, name: "Lecture 06", start: "03:40 PM", end: "04:30 PM", sMin: 940, eMin: 990 }
         ];
 
-        const students = ["Honey Soni", "Shivank Tiwari", "Lokeshwari Agnihotri", "Sneh Sahu", "Simran Shah", "Aman Namdev", "Abhishek Sahu", "Deeksha Patel", "Deepak Patel", "Devyansh Vishwakarma", "Prince Lakhera"];
+        const students = [
+            "Honey Soni", "Shivank Tiwari", "Lokeshwari Agnihotri", "Sneh Sahu", 
+            "Simran Shah", "Aman Namdev", "Abhishek Sahu", "Deeksha Patel", 
+            "Deepak Patel", "Devyansh Vishwakarma", "Prince Lakhera"
+        ];
 
-        // --- APP STATE ---
+        // --- STATE ENGINES ---
         let selectedDay = 'MON';
         let selectedTeacher = '';
         let selectedLecture = null;
         let presentStudents = [];
         let isManual = false;
 
-        // --- DOM ELEMENTS ---
         const dayEl = document.getElementById('day-select');
         const teacherEl = document.getElementById('teacher-select');
         const slotEl = document.getElementById('slot-select');
         const studentGrid = document.getElementById('student-grid');
         const resyncBtn = document.getElementById('resync-btn');
 
-        // --- INITIALIZE UI ---
+        // --- CORE LOGIC ---
         function init() {
             teachers.forEach(t => {
                 const opt = document.createElement('option');
@@ -253,8 +271,8 @@ BY:- HONEY SONI (CY14)
 
             students.forEach(s => {
                 const btn = document.createElement('button');
-                btn.className = "student-btn flex items-center justify-between px-4 py-3.5 rounded-2xl border transition-all duration-300 bg-slate-950 border-white/5 text-slate-500 hover:border-emerald-500/30";
-                btn.innerHTML = `<span class="text-[10px] font-bold uppercase truncate pr-1">${s}</span><div class="dot w-3 h-3 rounded-full border border-slate-800"></div>`;
+                btn.className = "student-btn flex items-center justify-between px-4 py-3 rounded-2xl border transition-all duration-300 bg-slate-950 border-white/5 text-slate-500 hover:border-emerald-500/30";
+                btn.innerHTML = `<span class="text-[10px] font-bold uppercase truncate pr-1">${s}</span><div class="dot w-3.5 h-3.5 rounded-full border-2 border-slate-800"></div>`;
                 btn.onclick = () => toggleStudent(s, btn);
                 studentGrid.appendChild(btn);
             });
@@ -263,276 +281,41 @@ BY:- HONEY SONI (CY14)
             setInterval(updateClock, 1000);
         }
 
-        // --- FORENSIC IMAGE CAPTURE FUNCTION ---
+        // FORENSIC CAPTURE: Renders the card as a high-quality PNG
         function saveAsImage() {
             const card = document.getElementById('export-card');
             const btn = document.getElementById('download-btn');
             
-            // UI Feedback during capture
-            btn.innerHTML = `<span class="animate-pulse">Capturing...</span>`;
             btn.disabled = true;
+            btn.innerHTML = `<span class="animate-pulse text-[8px]">PROCESSING...</span>`;
 
             html2canvas(card, {
-                scale: 3, // High DPI for better readability in reports
+                scale: 3, // Increased scale for forensic clarity
                 useCORS: true,
-                backgroundColor: "#FFFFFF"
+                backgroundColor: "#FFFFFF",
+                logging: false,
+                width: 360,
+                height: 640
             }).then(canvas => {
                 const image = canvas.toDataURL("image/png", 1.0);
                 const link = document.createElement('a');
-                
-                // Filename includes timestamp for easier file organization
-                const timestamp = new Date().toISOString().replace(/[:.]/g, '-').slice(0, 19);
-                link.download = `BTIRT_Attendance_${timestamp}.png`;
+                const ts = new Date().toISOString().replace(/[:.]/g, '-').slice(0, 19);
+                link.download = `BTIRT_LOG_${ts}.png`;
                 link.href = image;
                 link.click();
                 
-                // Reset button
-                btn.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg> Save Image`;
+                btn.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg> Save Artifact`;
                 btn.disabled = false;
             }).catch(err => {
-                console.error("Capture Failed:", err);
-                btn.innerHTML = `Error!`;
+                btn.innerHTML = `FAIL`;
                 btn.disabled = false;
             });
         }
 
         function updateClock() {
             const now = new Date();
-            const timeStr = now.toLocaleTimeString('en-IN', { timeZone: 'Asia/Kolkata', hour12: true, hour: '2-digit', minute: '2-digit', second: '2-digit' });
-            document.getElementById('live-clock').innerHTML = `${timeStr.split(' ')[0]} <span class="text-emerald-500 text-xl">${timeStr.split(' ')[1]}</span>`;
-            document.getElementById('card-clock').innerHTML = `${timeStr.split(' ')[0]} <span class="text-sm">${timeStr.split(' ')[1]}</span>`;
-            
-            if (!isManual) sync();
-        }
-
-        function sync() {
-            const now = new Date();
-            const dayMap = ["SUN", "MON", "TUE", "WED", "THU", "FRI", "SAT"];
-            const curDay = dayMap[now.getDay()];
-            const curMin = now.getHours() * 60 + now.getMinutes();
-
-            selectedDay = schedule[curDay] ? curDay : "MON";
-            dayEl.value = selectedDay;
-
-            const slotIdx = slots.findIndex(s => curMin >= s.sMin && curMin < s.eMin);
-            if (slotIdx !== -1) {
-                const teacherCode = schedule[selectedDay][slotIdx];
-                const teacherObj = teachers.find(t => t.id === teacherCode);
-                
-                let first = slotIdx, last = slotIdx;
-                while (first > 0 && schedule[selectedDay][first-1] === teacherCode) first--;
-                while (last < slots.length - 1 && schedule[selectedDay][last+1]                    <h2 class="text-black text-xl font-black tracking-tighter uppercase leading-none">BTIRT COLLEGE</h2>
-                    <p class="text-slate-500 text-xs font-black uppercase mt-0.5">Today's Attendance</p>
-                    <div class="flex items-center justify-center gap-2 text-[10px] font-black text-slate-800 uppercase mt-1">
-                        <span>Cyber Security</span>
-                        <span class="text-emerald-500">•</span>
-                        <span>4th Sem</span>
-                    </div>
-                </div>
-
-                <div class="relative z-10 space-y-2 flex-grow overflow-hidden">
-                    <div class="grid grid-cols-12 gap-2">
-                        <div class="col-span-8 border-2 border-black rounded-lg p-2 bg-white flex justify-between items-center shadow-[2px_2px_0px_#000]">
-                            <div class="overflow-hidden">
-                                <p class="text-[7px] font-black text-black uppercase">Attendance Date</p>
-                                <p id="card-date" class="text-black font-black text-sm tracking-tighter italic truncate">14 April 2026</p>
-                            </div>
-                            <div class="border-2 border-black px-1.5 py-0.5 bg-white">
-                                <span id="card-day" class="text-black font-black text-xs uppercase italic">TUE</span>
-                            </div>
-                        </div>
-                        <div class="col-span-4 bg-black border-2 border-black rounded-lg p-2 flex flex-col items-center justify-center text-white">
-                            <p class="text-[7px] font-black uppercase opacity-70">Lecture</p>
-                            <p id="card-lecture-num" class="text-lg font-black italic">#00</p>
-                        </div>
-                    </div>
-
-                    <div class="border-2 border-black rounded-lg p-2 bg-white shadow-[2px_2px_0px_#000]">
-                        <p class="text-[7px] font-black text-black uppercase text-center border-b border-black pb-0.5">Lecture Timing</p>
-                        <p id="card-timing" class="text-black font-black text-sm mono text-center tracking-tighter mt-0.5 italic">--- OFFLINE ---</p>
-                    </div>
-
-                    <div class="border-2 border-black rounded-lg p-2.5 bg-white shadow-[2px_2px_0px_#000]">
-                        <p class="text-[7px] font-black text-black uppercase mb-0.5">Authorised Faculty</p>
-                        <p id="card-faculty" class="text-black font-black text-lg uppercase tracking-tighter italic leading-none">AWAITING_ID</p>
-                    </div>
-
-                    <div class="border-2 border-black rounded-lg p-1.5 bg-white w-2/3 shadow-[3px_3px_0px_#000]">
-                        <p id="card-subject" class="text-black font-black text-xs uppercase italic tracking-tighter truncate">---</p>
-                    </div>
-
-                    <div class="border-2 border-black rounded-lg p-3 bg-white min-h-[180px] flex flex-col shadow-[2px_2px_0px_#000]">
-                        <div id="card-students" class="space-y-0.5 flex-grow">
-                            <!-- Selected students injected here -->
-                        </div>
-                    </div>
-
-                    <div class="border-2 border-black rounded-xl p-2 bg-white shadow-[4px_4px_0px_#000]">
-                        <p id="card-clock" class="text-2xl font-black text-black mono text-center tracking-tighter italic">00:00:00 <span class="text-sm">PM</span></p>
-                    </div>
-                </div>
-
-                <div class="mt-2 pt-2 border-t-2 border-black flex justify-between items-center">
-                    <p class="text-black font-black text-xs italic tracking-tighter uppercase">BY - <span class="text-emerald-600">Honey Soni</span></p>
-                    <div class="bg-black text-white px-2 py-0.5 font-black italic text-[9px]">CY (14)</div>
-                </div>
-            </div>
-
-            <div class="flex gap-4 w-full max-w-[360px]">
-                <button onclick="window.print()" class="flex-1 bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-black py-4 rounded-2xl flex items-center justify-center gap-2 transition-all shadow-xl uppercase text-[10px] tracking-widest">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
-                    Save Image
-                </button>
-                <button onclick="alert('Ready to share. Use your browser share menu.')" class="flex-1 bg-white text-black font-black py-4 rounded-2xl flex items-center justify-center gap-2 hover:bg-slate-100 transition-all shadow-xl uppercase text-[10px] tracking-widest border-2 border-black">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg>
-                    Share Card
-                </button>
-            </div>
-        </section>
-    </main>
-
-    <footer class="text-center mt-10 opacity-30 py-8">
-        <p class="text-[9px] font-black uppercase tracking-[0.6em]">Tactical Web Tool: Honey Soni • CY 4th Semester</p>
-    </footer>
-
-    <script>
-        // --- DATA ---
-        const schedule = {
-            "MON": ["SK", "DRPB", "DRPB", "LUNCH", "MS", "AJ", "JK"],
-            "TUE": ["DRPB", "AU", "JK", "LUNCH", "AV", "AV", "AV"],
-            "WED": ["DRPB", "SK", "AJ", "LUNCH", "SK", "JK", "AJ"],
-            "THU": ["AU", "AJ", "SK", "LUNCH", "MS", "JK", "JK"],
-            "FRI": ["AU", "MENTOR", "JK", "LUNCH", "AU", "AV", "AV"],
-            "SAT": ["AU", "AU", "AJ", "LUNCH", "DRPB", "SK", "SK"]
-        };
-
-        const teachers = [
-            { id: "SK", name: "Siksha Kushwaha Mam", subject: "Computer Networks" },
-            { id: "DRPB", name: "Poonam Mam", subject: "Operating Systems" },
-            { id: "JK", name: "Javed Khan Sir", subject: "Database Management" },
-            { id: "AU", name: "Aditi Mam", subject: "Cyber Security" },
-            { id: "AJ", name: "Punit Sir", subject: "Linear Algebra" },
-            { id: "AV", name: "Akash Verma Sir", subject: "Python + Lab" },
-            { id: "MS", name: "Manish Shrivastava Sir", subject: "Communication Skills" },
-            { id: "MENTOR", name: "Library / Mentor", subject: "Research" },
-            { id: "LUNCH", name: "Lunch Break", subject: "System Idle" }
-        ];
-
-        const slots = [
-            { id: 0, name: "Lecture 01", start: "10:00 AM", end: "11:00 AM", sMin: 600, eMin: 660 },
-            { id: 1, name: "Lecture 02", start: "11:00 AM", end: "12:00 PM", sMin: 660, eMin: 720 },
-            { id: 2, name: "Lecture 03", start: "12:00 PM", end: "01:00 PM", sMin: 720, eMin: 780 },
-            { id: 3, name: "LUNCH BREAK", start: "01:00 PM", end: "01:40 PM", sMin: 780, eMin: 820, isBreak: true },
-            { id: 4, name: "Lecture 04", start: "01:40 PM", end: "02:40 PM", sMin: 820, eMin: 880 },
-            { id: 5, name: "Lecture 05", start: "02:40 PM", end: "03:40 PM", sMin: 880, eMin: 940 },
-            { id: 6, name: "Lecture 06", start: "03:40 PM", end: "04:30 PM", sMin: 940, eMin: 990 }
-        ];
-
-        const students = ["Honey Soni", "Shivank Tiwari", "Lokeshwari Agnihotri", "Sneh Sahu", "Simran Shah", "Aman Namdev", "Abhishek Sahu", "Deeksha Patel", "Deepak Patel", "Devyansh Vishwakarma", "Prince Lakhera"];
-
-        // --- APP STATE ---
-        let selectedDay = 'MON';
-        let selectedTeacher = '';
-        let selectedLecture = null;
-        let presentStudents = [];
-        let isManual = false;
-
-        // --- DOM ELEMENTS ---
-        const dayEl = document.getElementById('day-select');
-        const teacherEl = document.getElementById('teacher-select');
-        const slotEl = document.getElementById('slot-select');
-        const studentGrid = document.getElementById('student-grid');
-        const resyncBtn = document.getElementById('resync-btn');
-
-        // --- INITIALIZE UI ---
-        function init() {
-            // Populate Teachers
-            teachers.forEach(t => {
-                const opt = document.createElement('option');
-                opt.value = t.name;
-                opt.textContent = t.name;
-                teacherEl.appendChild(opt);
-            });
-
-            // Populate Slots
-            slots.forEach(s => {
-                const opt = document.createElement('option');
-                opt.value = s.id;
-                opt.textContent = `${s.name} (${s.start} - ${s.end})`;
-                slotEl.appendChild(opt);
-            });
-
-            // Populate Student Grid
-            students.forEach(s => {
-                const btn = document.createElement('button');
-                btn.className = "student-btn flex items-center justify-between px-4 py-3.5 rounded-2xl border transition-all duration-300 bg-slate-950 border-white/5 text-slate-500 hover:border-emerald-500/30";
-                btn.innerHTML = `<span class="text-[10px] font-bold uppercase truncate pr-1">${s}</span><div class="dot w-3 h-3 rounded-full border border-slate-800"></div>`;
-                btn.onclick = () => toggleStudent(s, btn);
-                studentGrid.appendChild(btn);
-            });
-
-            sync();
-            setInterval(updateClock, 1000);
-        }
-
-        function updateClock() {
-            const now = new Date();
-            const timeStr = now.toLocaleTimeString('en-IN', { timeZone: 'Asia/Kolkata', hour12: true, hour: '2-digit', minute: '2-digit', second: '2-digit' });
-            document.getElementById('live-clock').innerHTML = `${timeStr.split(' ')[0]} <span class="text-emerald-500 text-xl">${timeStr.split(' ')[1]}</span>`;
-            document.getElementById('card-clock').innerHTML = `${timeStr.split(' ')[0]} <span class="text-sm">${timeStr.split(' ')[1]}</span>`;
-            
-            if (!isManual) sync();
-        }
-
-        function sync() {
-            const now = new Date();
-            const dayMap = ["SUN", "MON", "TUE", "WED", "THU", "FRI", "SAT"];
-            const curDay = dayMap[now.getDay()];
-            const curMin = now.getHours() * 60 + now.getMinutes();
-
-            selectedDay = schedule[curDay] ? curDay : "MON";
-            dayEl.value = selectedDay;
-
-            const slotIdx = slots.findIndex(s => curMin >= s.sMin && curMin < s.eMin);
-            if (slotIdx !== -1) {
-                const teacherCode = schedule[selectedDay][slotIdx];
-                const teacherObj = teachers.find(t => t.id === teacherCode);
-                
-                let first = slotIdx, last = slotIdx;
-                while (first > 0 && schedule[selectedDay][first-1] === teacherCode) first--;
-                while (last < slots.length - 1 && schedule[selectedDay][last+1] === teacherCode) last++;
-
-                selectedLecture = {
-                    id: slotIdx,
-                    num: slots[slotIdx].name.includes(' ') ? slots[slotIdx].name.split(' ')[1] : "LB",
-                    name: first !== last ? "Lab Session" : slots[slotIdx].name,
-                    start: slots[first].start,
-                    end: slots[last].end
-                };
-                
-                selectedTeacher = teacherObj ? teacherObj.name : '';
-                teacherEl.value = selectedTeacher;
-                slotEl.value = slotIdx;
-            }
-            updateCard();
-        }
-
-        function toggleStudent(name, btn) {
-            if (presentStudents.includes(name)) {
-                presentStudents = presentStudents.filter(s => s !== name);
-                btn.classList.remove('bg-emerald-500', 'border-emerald-400', 'text-slate-950', 'shadow-lg');
-                btn.classList.add('bg-slate-950', 'border-white/5', 'text-slate-500');
-                btn.querySelector('.dot').innerHTML = '';
-                btn.querySelector('.dot').className = "dot w-3 h-3 rounded-full border border-slate-800";
-            } else {
-                presentStudents.push(name);
-                btn.classList.add('bg-emerald-500', 'border-emerald-400', 'text-slate-950', 'shadow-lg');
-                btn.classList.remove('bg-slate-950', 'border-white/5', 'text-slate-500');
-                btn.querySelector('.dot').className = "dot w-3 h-3 rounded-full flex items-center justify-center";
-                btn.querySelector('.dot').innerHTML = '<svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="4"><polyline points="20 6 9 17 4 12"></polyline></svg>';
-            }
-            document.getElementById('active-count').textContent = `${presentStudents.length} Active`;
-            updateCard();
-        }
-
-        function updateCard
+            const ts = now.toLocaleTimeString('en-IN', { timeZone: 'Asia/Kolkata', hour12: true, hour: '2-digit', minute: '2-digit', second: '2-digit' });
+            const parts = ts.split(' ');
+            document.getElementById('live-clock').innerHTML = `${parts[0]} <span class="text-emerald-500 text-xl">${parts[1]}</span>`;
+            document.getElementById('card-clock').innerHTML = `${parts[0]} <span class="text-sm">${parts[1]}</span>`;
+            if (!isMan
