@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -18,7 +17,8 @@
         ::-webkit-scrollbar-track { background: transparent; }
         ::-webkit-scrollbar-thumb { background: #1e293b; border-radius: 10px; }
 
-        /* FIXED FORENSIC CARD SIZE (360x640) */
+        /* FIXED FORENSIC CARD SIZE (360x640) 
+           Force hardware acceleration and font-smoothing for clear export. */
         .id-card {
             width: 360px;
             height: 640px;
@@ -27,6 +27,8 @@
             background-color: white;
             border: 2px solid black;
             flex-shrink: 0;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
         }
     </style>
 </head>
@@ -48,10 +50,8 @@
                 </div>
             </div>
         </div>
-        <div class="mt-6 md:mt-0 text-center md:text-right">
-            <div id="live-clock" class="text-4xl font-black text-white tabular-nums tracking-tighter drop-shadow-glow">
-                00:00:00 <span class="text-emerald-500 text-xl">PM</span>
-            </div>
+        <div id="live-clock" class="mt-6 md:mt-0 text-4xl font-black text-white tabular-nums tracking-tighter drop-shadow-glow">
+            00:00:00 <span class="text-emerald-500 text-xl">PM</span>
         </div>
     </header>
 
@@ -62,18 +62,15 @@
             <div class="bg-slate-900/60 backdrop-blur-md p-8 rounded-[2.5rem] border border-white/5 shadow-xl">
                 <h2 class="text-xs font-black text-emerald-500 uppercase tracking-[0.3em] mb-6 flex items-center gap-3">
                     <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M3 12h1m8-9v1m8 8h1m-9 8v1M5.6 5.6l.7.7m12.1-.7-.7.7m0 11.4.7.7m-12.1-.7-.7.7"/></svg>
-                    One Faculty Config
+                    Identity Configuration
                 </h2>
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <div>
                         <label class="text-[10px] font-black text-slate-500 uppercase ml-2 mb-1 block">Operational Day</label>
                         <select id="day-select" class="w-full bg-slate-950 border border-white/10 rounded-2xl px-4 py-3 text-emerald-400 outline-none text-sm cursor-pointer hover:border-emerald-500/50 transition-all">
-                            <option value="MON">MON</option>
-                            <option value="TUE">TUE</option>
-                            <option value="WED">WED</option>
-                            <option value="THU">THU</option>
-                            <option value="FRI">FRI</option>
-                            <option value="SAT">SAT</option>
+                            <option value="MON">MON</option><option value="TUE">TUE</option>
+                            <option value="WED">WED</option><option value="THU">THU</option>
+                            <option value="FRI">FRI</option><option value="SAT">SAT</option>
                         </select>
                     </div>
                     <div>
@@ -100,27 +97,27 @@
                     <div id="active-count" class="bg-emerald-500 text-slate-950 text-[10px] font-black px-3 py-1 rounded-full uppercase shadow-lg shadow-emerald-500/20">0 Verified</div>
                 </div>
                 <div id="student-grid" class="grid grid-cols-2 gap-3">
-                    <!-- Students dynamically injected via JS -->
+                    <!-- Dynamic Student Buttons -->
                 </div>
             </div>
         </section>
 
-        <!-- SECTION 2: FORENSIC IDENTITY CARD PREVIEW (RIGHT) -->
+        <!-- SECTION 2: FORENSIC IDENTITY CARD PREVIEW -->
         <section class="lg:col-span-6 flex flex-col gap-6 items-center">
             
             <div id="export-card" class="id-card rounded-2xl p-4 relative overflow-hidden flex flex-col shadow-2xl">
                 <!-- Header -->
                 <div class="relative z-10 text-center mb-3 border-b-2 border-black pb-2">
                     <h2 class="text-black text-xl font-black tracking-tighter uppercase leading-none">BTIRT COLLEGE</h2>
-                    <p class="text-slate-500 text-xs font-black uppercase mt-0.5">Today's Attendance</p>
-                    <div class="flex items-center justify-center gap-2 text-[10px] font-black text-slate-800 uppercase mt-1">
+                    <p class="text-slate-500 text-[10px] font-black uppercase mt-0.5">Today's Attendance Snapshot</p>
+                    <div class="flex items-center justify-center gap-2 text-[9px] font-black text-slate-800 uppercase mt-1">
                         <span>Cyber Security</span>
                         <span class="text-emerald-500">•</span>
-                        <span>4th Sem</span>
+                        <span>4th Semester</span>
                     </div>
                 </div>
 
-                <div class="relative z-10 space-y-2 flex-grow overflow-hidden flex flex-col">
+                <div class="relative z-10 space-y-2 flex-grow flex flex-col overflow-hidden">
                     <div class="grid grid-cols-12 gap-2">
                         <div class="col-span-8 border-2 border-black rounded-lg p-2 bg-white flex justify-between items-center shadow-[2px_2px_0px_#000]">
                             <div class="overflow-hidden">
@@ -128,7 +125,7 @@
                                 <p id="card-date" class="text-black font-black text-sm tracking-tighter italic truncate">-- -- --</p>
                             </div>
                             <div class="border-2 border-black px-1.5 py-0.5 bg-white">
-                                <span id="card-day" class="text-black font-black text-xs uppercase italic">---</span>
+                                <span id="card-day" class="text-black font-black text-[10px] uppercase italic">---</span>
                             </div>
                         </div>
                         <div class="col-span-4 bg-black border-2 border-black rounded-lg p-2 flex flex-col items-center justify-center text-white">
@@ -142,20 +139,20 @@
                         <p id="card-timing" class="text-black font-black text-sm mono text-center tracking-tighter mt-0.5 italic">--- OFFLINE ---</p>
                     </div>
 
-                    <div class="border-2 border-black rounded-lg p-2.5 bg-white shadow-[2px_2px_0px_#000]">
+                    <div class="border-2 border-black rounded-lg p-2 bg-white shadow-[2px_2px_0px_#000]">
                         <p class="text-[7px] font-black text-black uppercase mb-0.5">Authorised Faculty</p>
-                        <p id="card-faculty" class="text-black font-black text-lg uppercase tracking-tighter italic leading-none truncate">AWAITING_ID</p>
+                        <p id="card-faculty" class="text-black font-black text-[15px] uppercase tracking-tighter italic leading-tight truncate">AWAITING_ID</p>
                     </div>
 
                     <div class="border-2 border-black rounded-lg p-1.5 bg-white w-2/3 shadow-[3px_3px_0px_#000]">
-                        <p id="card-subject" class="text-black font-black text-[10px] uppercase italic tracking-tighter truncate">---</p>
+                        <p id="card-subject" class="text-black font-black text-[9px] uppercase italic tracking-tighter truncate">---</p>
                     </div>
 
-                    <div class="border-2 border-black rounded-lg p-3 bg-white flex-grow flex flex-col shadow-[2px_2px_0px_#000] overflow-hidden">
-                        <div id="card-students" class="space-y-0.5 flex-grow">
-                            <div class="h-full flex items-center justify-center opacity-20 py-10">
-                                <p class="text-black font-black text-[9px] uppercase italic">Awaiting Log Registry...</p>
-                            </div>
+                    <!-- COMPACT ROSTER GRID -->
+                    <div class="border-2 border-black rounded-lg p-2 bg-white flex-grow flex flex-col shadow-[2px_2px_0px_#000] overflow-hidden">
+                        <p class="text-[7px] font-black text-slate-400 uppercase mb-1">Verified Personnel Log</p>
+                        <div id="card-students" class="grid grid-cols-2 gap-x-3 gap-y-0.5 content-start overflow-hidden">
+                            <!-- Compact entries will go here -->
                         </div>
                     </div>
 
@@ -165,17 +162,18 @@
                 </div>
 
                 <div class="mt-2 pt-2 border-t-2 border-black flex justify-between items-center">
-                    <p class="text-black font-black text-xs italic tracking-tighter uppercase">BY - <span class="text-emerald-600">Honey Soni</span></p>
-                    <div class="bg-black text-white px-2 py-0.5 font-black italic text-[9px]">CY (14)</div>
+                    <p class="text-black font-black text-[10px] italic tracking-tighter uppercase">BY - <span class="text-emerald-600">Honey Soni</span></p>
+                    <div class="bg-black text-white px-2 py-0.5 font-black italic text-[8px]">CY (14)</div>
                 </div>
             </div>
 
+            <!-- ACTION TRIGGERS -->
             <div class="flex gap-4 w-full max-w-[360px]">
                 <button id="download-btn" onclick="saveAsImage()" class="flex-1 bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-black py-4 rounded-2xl flex items-center justify-center gap-2 transition-all active:scale-95 shadow-xl uppercase text-[10px] tracking-widest group">
                     <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 group-hover:-translate-y-1 transition-transform" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
                     Save Artifact
                 </button>
-                <button onclick="alert('Verification Node Active. Please use device screen sharing options for transmission.')" class="flex-1 bg-white text-black font-black py-4 rounded-2xl flex items-center justify-center gap-2 hover:bg-slate-100 transition-all active:scale-95 shadow-xl uppercase text-[10px] tracking-widest border-2 border-black">
+                <button onclick="alert('Ready to share. Use system screen tools for transmit.')" class="flex-1 bg-white text-black font-black py-4 rounded-2xl flex items-center justify-center gap-2 hover:bg-slate-100 transition-all active:scale-95 shadow-xl uppercase text-[10px] tracking-widest border-2 border-black">
                     <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg>
                     Share Log
                 </button>
@@ -184,11 +182,11 @@
     </main>
 
     <footer class="text-center mt-12 opacity-20 py-8 border-t border-white/5">
-        <p class="text-[9px] font-black uppercase tracking-[0.8em]">System Developed By Honey Soni • CYBER SECURITY DEPT • BTIRT</p>
+        <p class="text-[9px] font-black uppercase tracking-[0.8em]">Developed By Honey Soni • CYBER SECURITY DEPT • BTIRT</p>
     </footer>
 
-    <script>
-        // --- DATA REPOSITORY ---
+     <script>
+        // --- SECURE DATA STORE ---
         const schedule = {
             "MON": ["SK", "DRPB", "DRPB", "LUNCH", "MS", "AJ", "JK"],
             "TUE": ["DRPB", "AU", "JK", "LUNCH", "AV", "AV", "AV"],
@@ -229,14 +227,11 @@
         let presentStudents = [];
         let isManual = false;
 
-        // DOM REFERENCES
         const dayEl = document.getElementById('day-select');
         const teacherEl = document.getElementById('teacher-select');
         const slotEl = document.getElementById('slot-select');
         const studentGrid = document.getElementById('student-grid');
         const resyncBtn = document.getElementById('resync-btn');
-
-        // --- SYSTEM CORE FUNCTIONS ---
 
         function updateCard() {
             const now = new Date();
@@ -252,20 +247,19 @@
             const list = document.getElementById('card-students');
             list.innerHTML = '';
             if (presentStudents.length === 0) {
-                list.innerHTML = '<div class="h-full flex items-center justify-center opacity-20 py-10"><p class="text-black font-black text-[9px] uppercase italic">Awaiting Log Registry...</p></div>';
+                list.innerHTML = '<div class="col-span-2 h-full flex items-center justify-center opacity-20 py-10"><p class="text-black font-black text-[9px] uppercase italic">Awaiting Log Registry...</p></div>';
             } else {
-                presentStudents.slice(0, 10).forEach((s, i) => {
+                // FORENSIC MANAGEMENT: Show up to 20 students in a grid
+                presentStudents.slice(0, 20).forEach((s, i) => {
                     const row = document.createElement('div');
-                    row.className = "flex items-center gap-2 text-black border-b border-black/5 py-0.5";
-                    row.innerHTML = `<span class="text-[8px] font-black w-4 text-emerald-600">${i+1}</span><span class="text-xs font-black uppercase tracking-tighter italic flex-grow truncate">${s}</span><div class="w-1.5 h-1.5 bg-black rounded-full"></div>`;
+                    row.className = "flex items-center gap-1.5 text-black border-b border-black/5 py-0.5 overflow-hidden";
+                    row.innerHTML = `
+                        <span class="text-[7px] font-black w-3 text-emerald-600">${i+1}</span>
+                        <span class="text-[9px] font-black uppercase tracking-tighter italic truncate flex-grow">${s}</span>
+                        <div class="w-1 h-1 bg-black rounded-full flex-shrink-0"></div>
+                    `;
                     list.appendChild(row);
                 });
-                if (presentStudents.length > 10) {
-                    const extra = document.createElement('div');
-                    extra.className = "text-center pt-1";
-                    extra.innerHTML = `<p class="text-[7px] font-bold text-slate-400">... +${presentStudents.length - 10} OTHERS IN LOG</p>`;
-                    list.appendChild(extra);
-                }
             }
         }
 
@@ -275,27 +269,17 @@
             const dayMap = ["SUN", "MON", "TUE", "WED", "THU", "FRI", "SAT"];
             const curDay = dayMap[now.getDay()];
             const curMin = now.getHours() * 60 + now.getMinutes();
-
             selectedDay = schedule[curDay] ? curDay : "MON";
             dayEl.value = selectedDay;
-
             const slotIdx = slots.findIndex(s => curMin >= s.sMin && curMin < s.eMin);
             if (slotIdx !== -1) {
                 const dayData = schedule[selectedDay];
                 const teacherCode = dayData[slotIdx];
                 const teacherObj = teachers.find(t => t.id === teacherCode);
-                
                 let f = slotIdx, l = slotIdx;
                 while (f > 0 && dayData[f-1] === teacherCode) f--;
                 while (l < slots.length - 1 && dayData[l+1] === teacherCode) l++;
-
-                selectedLecture = {
-                    id: slotIdx,
-                    num: slots[slotIdx].name.split(' ')[1] || 'LB',
-                    start: slots[f].start,
-                    end: slots[l].end
-                };
-                
+                selectedLecture = { num: slots[slotIdx].name.split(' ')[1] || 'LB', start: slots[f].start, end: slots[l].end };
                 selectedTeacher = teacherObj ? teacherObj.name : 'UNIDENTIFIED';
                 teacherEl.value = selectedTeacher;
                 slotEl.value = slotIdx;
@@ -321,10 +305,29 @@
         async function saveAsImage() {
             const card = document.getElementById('export-card');
             const btn = document.getElementById('download-btn');
+            
+            // Hard Fix: Scroll to top to prevent html2canvas coordinate shifting (the "half-letter" bug)
+            window.scrollTo(0,0);
+
             btn.disabled = true;
-            btn.innerHTML = `<span class="animate-pulse text-[8px]">CAPTURING...</span>`;
+            btn.innerHTML = `<span class="animate-pulse text-[8px]">SNAPSHOT...</span>`;
+
             try {
-                const canvas = await html2canvas(card, { scale: 3, useCORS: true, backgroundColor: "#FFFFFF", width: 360, height: 640 });
+                // High-Resolution Configuration
+                const canvas = await html2canvas(card, { 
+                    scale: 3, 
+                    useCORS: true, 
+                    backgroundColor: "#FFFFFF",
+                    width: 360,
+                    height: 640,
+                    letterRendering: true, // Fixes clipping of individual letters
+                    scrollX: 0,
+                    scrollY: -window.scrollY,
+                    onclone: (clonedDoc) => {
+                        // Ensure all fonts are smoothed in the clone
+                        clonedDoc.getElementById('export-card').style.fontVariantLigatures = 'none';
+                    }
+                });
                 const image = canvas.toDataURL("image/png", 1.0);
                 const link = document.createElement('a');
                 const ts = new Date().toISOString().replace(/[:.]/g, '-').slice(0, 19);
@@ -340,21 +343,16 @@
         }
 
         function init() {
-            // Populate Dropdowns
             teachers.forEach(t => {
                 const opt = document.createElement('option');
-                opt.value = t.name;
-                opt.textContent = t.name;
+                opt.value = t.name; opt.textContent = t.name;
                 teacherEl.appendChild(opt);
             });
             slots.forEach(s => {
                 const opt = document.createElement('option');
-                opt.value = s.id;
-                opt.textContent = `${s.name} (${s.start} - ${s.end})`;
+                opt.value = s.id; opt.textContent = `${s.name} (${s.start} - ${s.end})`;
                 slotEl.appendChild(opt);
             });
-
-            // Build Roster
             students.forEach(s => {
                 const btn = document.createElement('button');
                 btn.className = "student-btn flex items-center justify-between px-4 py-3.5 rounded-2xl border transition-all duration-300 bg-slate-950 border-white/5 text-slate-500 hover:border-emerald-500/30";
@@ -363,16 +361,14 @@
                 studentGrid.appendChild(btn);
             });
 
-            // Wire Listeners
             dayEl.onchange = () => { isManual = true; selectedDay = dayEl.value; resyncBtn.classList.remove('hidden'); updateCard(); };
             teacherEl.onchange = () => { isManual = true; selectedTeacher = teacherEl.value; resyncBtn.classList.remove('hidden'); updateCard(); };
             slotEl.onchange = () => {
-                isManual = true;
-                resyncBtn.classList.remove('hidden');
+                isManual = true; resyncBtn.classList.remove('hidden');
                 const id = parseInt(slotEl.value);
                 const s = slots[id];
                 const dayData = schedule[selectedDay];
-                selectedLecture = { id, num: s.name.split(' ')[1] || 'LB', start: s.start, end: s.end };
+                selectedLecture = { num: s.name.split(' ')[1] || 'LB', start: s.start, end: s.end };
                 const tCode = dayData ? dayData[id] : null;
                 const tObj = teachers.find(t => t.id === tCode);
                 if (tObj) { selectedTeacher = tObj.name; teacherEl.value = selectedTeacher; }
@@ -380,7 +376,6 @@
             };
             resyncBtn.onclick = () => { isManual = false; resyncBtn.classList.add('hidden'); sync(); };
 
-            // Initialize Services
             sync();
             setInterval(() => {
                 const now = new Date();
@@ -392,7 +387,6 @@
             }, 1000);
         }
 
-        // ENTRY POINT: START SYSTEM
         window.onload = init;
     </script>
 </body>
