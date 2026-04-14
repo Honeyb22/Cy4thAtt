@@ -1,4 +1,4 @@
-BY:-HONEY SONI(CY14)
+BY:- HONEY SONI (CY14)
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -6,7 +6,7 @@ BY:-HONEY SONI(CY14)
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>BTIRT Attendance | Secure Node</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Forensic capture library: Allows DOM-to-Image serialization -->
+    <!-- Forensic capture library: Using a reliable CDN for DOM-to-Image serialization -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&family=JetBrains+Mono:wght@700&display=swap" rel="stylesheet">
     <style>
@@ -19,9 +19,7 @@ BY:-HONEY SONI(CY14)
         ::-webkit-scrollbar-track { background: transparent; }
         ::-webkit-scrollbar-thumb { background: #1e293b; border-radius: 10px; }
 
-        /* FIXED FORENSIC CARD SIZE (360x640) 
-           In digital forensics, standardized evidence sizes ensure consistent analysis.
-        */
+        /* FIXED FORENSIC CARD SIZE (360x640) */
         .id-card {
             width: 360px;
             height: 640px;
@@ -97,24 +95,20 @@ BY:-HONEY SONI(CY14)
                 </div>
             </div>
 
-            <!-- STUDENT REGISTRY (2 NAMES PER LINE) -->
             <div class="bg-slate-900/60 backdrop-blur-md p-8 rounded-[2.5rem] border border-white/5">
                 <div class="flex justify-between items-center mb-6">
                     <h2 class="text-xs font-black text-emerald-500 uppercase tracking-[0.3em]">Personnel Name</h2>
                     <div id="active-count" class="bg-emerald-500 text-slate-950 text-[10px] font-black px-3 py-1 rounded-full uppercase shadow-lg shadow-emerald-500/20">0 Verified</div>
                 </div>
                 <div id="student-grid" class="grid grid-cols-2 gap-3">
-                    <!-- Students dynamically injected -->
+                    <!-- Students injected via script -->
                 </div>
             </div>
         </section>
 
-        <!-- SECTION 2: FORENSIC IDENTITY CARD PREVIEW (RIGHT) -->
+        <!-- SECTION 2: FORENSIC IDENTITY CARD PREVIEW -->
         <section class="lg:col-span-6 flex flex-col gap-6 items-center">
-            
-            <!-- FIXED 360x640 CAPTURE AREA -->
             <div id="export-card" class="id-card rounded-2xl p-4 relative overflow-hidden flex flex-col shadow-2xl">
-                <!-- Header -->
                 <div class="relative z-10 text-center mb-3 border-b-2 border-black pb-2">
                     <h2 class="text-black text-xl font-black tracking-tighter uppercase leading-none">BTIRT COLLEGE</h2>
                     <p class="text-slate-500 text-xs font-black uppercase mt-0.5">Today's Attendance</p>
@@ -127,7 +121,6 @@ BY:-HONEY SONI(CY14)
 
                 <div class="relative z-10 space-y-2 flex-grow overflow-hidden flex flex-col">
                     <div class="grid grid-cols-12 gap-2">
-                        <!-- Date Block -->
                         <div class="col-span-8 border-2 border-black rounded-lg p-2 bg-white flex justify-between items-center shadow-[2px_2px_0px_#000]">
                             <div class="overflow-hidden">
                                 <p class="text-[7px] font-black text-black uppercase">Attendance Date</p>
@@ -137,31 +130,26 @@ BY:-HONEY SONI(CY14)
                                 <span id="card-day" class="text-black font-black text-xs uppercase italic">---</span>
                             </div>
                         </div>
-                        <!-- Lecture Number -->
                         <div class="col-span-4 bg-black border-2 border-black rounded-lg p-2 flex flex-col items-center justify-center text-white">
                             <p class="text-[7px] font-black uppercase opacity-70">Lecture</p>
                             <p id="card-lecture-num" class="text-lg font-black italic">#00</p>
                         </div>
                     </div>
 
-                    <!-- Timing Window -->
                     <div class="border-2 border-black rounded-lg p-2 bg-white shadow-[2px_2px_0px_#000]">
                         <p class="text-[7px] font-black text-black uppercase text-center border-b border-black pb-0.5">Lecture Timing</p>
                         <p id="card-timing" class="text-black font-black text-sm mono text-center tracking-tighter mt-0.5 italic">--- OFFLINE ---</p>
                     </div>
 
-                    <!-- Faculty Identification -->
                     <div class="border-2 border-black rounded-lg p-2.5 bg-white shadow-[2px_2px_0px_#000]">
                         <p class="text-[7px] font-black text-black uppercase mb-0.5">Authorised Faculty</p>
                         <p id="card-faculty" class="text-black font-black text-lg uppercase tracking-tighter italic leading-none truncate">AWAITING_ID</p>
                     </div>
 
-                    <!-- Module/Subject -->
                     <div class="border-2 border-black rounded-lg p-1.5 bg-white w-2/3 shadow-[3px_3px_0px_#000]">
                         <p id="card-subject" class="text-black font-black text-[10px] uppercase italic tracking-tighter truncate">---</p>
                     </div>
 
-                    <!-- Log Stream (Personnel List) -->
                     <div class="border-2 border-black rounded-lg p-3 bg-white flex-grow flex flex-col shadow-[2px_2px_0px_#000] overflow-hidden">
                         <div id="card-students" class="space-y-0.5 flex-grow">
                             <div class="h-full flex items-center justify-center opacity-20 py-10">
@@ -170,26 +158,23 @@ BY:-HONEY SONI(CY14)
                         </div>
                     </div>
 
-                    <!-- Temporal Snapshot (Clock) -->
                     <div class="border-2 border-black rounded-xl p-2 bg-white shadow-[4px_4px_0px_#000] mt-auto">
                         <p id="card-clock" class="text-2xl font-black text-black mono text-center tracking-tighter italic tabular-nums">00:00:00 <span class="text-sm">PM</span></p>
                     </div>
                 </div>
 
-                <!-- Forensic Signature -->
                 <div class="mt-2 pt-2 border-t-2 border-black flex justify-between items-center">
                     <p class="text-black font-black text-xs italic tracking-tighter uppercase">BY - <span class="text-emerald-600">Honey Soni</span></p>
                     <div class="bg-black text-white px-2 py-0.5 font-black italic text-[9px]">CY (14)</div>
                 </div>
             </div>
 
-            <!-- ACTION TRIGGERS -->
             <div class="flex gap-4 w-full max-w-[360px]">
                 <button id="download-btn" onclick="saveAsImage()" class="flex-1 bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-black py-4 rounded-2xl flex items-center justify-center gap-2 transition-all active:scale-95 shadow-xl uppercase text-[10px] tracking-widest group">
                     <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 group-hover:-translate-y-1 transition-transform" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
                     Save Artifact
                 </button>
-                <button onclick="alert('Verification Node Active. Please use device screen sharing options for transmission.')" class="flex-1 bg-white text-black font-black py-4 rounded-2xl flex items-center justify-center gap-2 hover:bg-slate-100 transition-all active:scale-95 shadow-xl uppercase text-[10px] tracking-widest border-2 border-black">
+                <button onclick="alert('Ready to share. Use device sharing for transmission.')" class="flex-1 bg-white text-black font-black py-4 rounded-2xl flex items-center justify-center gap-2 hover:bg-slate-100 transition-all active:scale-95 shadow-xl uppercase text-[10px] tracking-widest border-2 border-black">
                     <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg>
                     Share Log
                 </button>
@@ -198,11 +183,11 @@ BY:-HONEY SONI(CY14)
     </main>
 
     <footer class="text-center mt-12 opacity-20 py-8 border-t border-white/5">
-        <p class="text-[9px] font-black uppercase tracking-[0.8em]">System Developed By Honey Soni • CYBER SECURITY DEPT • BTIRT</p>
+        <p class="text-[9px] font-black uppercase tracking-[0.8em]">Developed By Honey Soni • BTIRT CYBER SECURITY</p>
     </footer>
 
     <script>
-        // --- SECURE DATA STORE ---
+        // --- DATA REPOSITORY ---
         const schedule = {
             "MON": ["SK", "DRPB", "DRPB", "LUNCH", "MS", "AJ", "JK"],
             "TUE": ["DRPB", "AU", "JK", "LUNCH", "AV", "AV", "AV"],
@@ -234,11 +219,7 @@ BY:-HONEY SONI(CY14)
             { id: 6, name: "Lecture 06", start: "03:40 PM", end: "04:30 PM", sMin: 940, eMin: 990 }
         ];
 
-        const students = [
-            "Honey Soni", "Shivank Tiwari", "Lokeshwari Agnihotri", "Sneh Sahu", 
-            "Simran Shah", "Aman Namdev", "Abhishek Sahu", "Deeksha Patel", 
-            "Deepak Patel", "Devyansh Vishwakarma", "Prince Lakhera"
-        ];
+        const students = ["Honey Soni", "Shivank Tiwari", "Lokeshwari Agnihotri", "Sneh Sahu", "Simran Shah", "Aman Namdev", "Abhishek Sahu", "Deeksha Patel", "Deepak Patel", "Devyansh Vishwakarma", "Prince Lakhera"];
 
         // --- STATE ENGINES ---
         let selectedDay = 'MON';
@@ -253,8 +234,9 @@ BY:-HONEY SONI(CY14)
         const studentGrid = document.getElementById('student-grid');
         const resyncBtn = document.getElementById('resync-btn');
 
-        // --- CORE LOGIC ---
+        // --- CORE INITIALIZATION ---
         function init() {
+            // Populate Dropdowns
             teachers.forEach(t => {
                 const opt = document.createElement('option');
                 opt.value = t.name;
@@ -269,9 +251,10 @@ BY:-HONEY SONI(CY14)
                 slotEl.appendChild(opt);
             });
 
+            // Build Personnel Grid
             students.forEach(s => {
                 const btn = document.createElement('button');
-                btn.className = "student-btn flex items-center justify-between px-4 py-3 rounded-2xl border transition-all duration-300 bg-slate-950 border-white/5 text-slate-500 hover:border-emerald-500/30";
+                btn.className = "student-btn flex items-center justify-between px-4 py-3.5 rounded-2xl border transition-all duration-300 bg-slate-950 border-white/5 text-slate-500 hover:border-emerald-500/30";
                 btn.innerHTML = `<span class="text-[10px] font-bold uppercase truncate pr-1">${s}</span><div class="dot w-3.5 h-3.5 rounded-full border-2 border-slate-800"></div>`;
                 btn.onclick = () => toggleStudent(s, btn);
                 studentGrid.appendChild(btn);
@@ -281,41 +264,57 @@ BY:-HONEY SONI(CY14)
             setInterval(updateClock, 1000);
         }
 
-        // FORENSIC CAPTURE: Renders the card as a high-quality PNG
-        function saveAsImage() {
-            const card = document.getElementById('export-card');
-            const btn = document.getElementById('download-btn');
-            
-            btn.disabled = true;
-            btn.innerHTML = `<span class="animate-pulse text-[8px]">PROCESSING...</span>`;
-
-            html2canvas(card, {
-                scale: 3, // Increased scale for forensic clarity
-                useCORS: true,
-                backgroundColor: "#FFFFFF",
-                logging: false,
-                width: 360,
-                height: 640
-            }).then(canvas => {
-                const image = canvas.toDataURL("image/png", 1.0);
-                const link = document.createElement('a');
-                const ts = new Date().toISOString().replace(/[:.]/g, '-').slice(0, 19);
-                link.download = `BTIRT_LOG_${ts}.png`;
-                link.href = image;
-                link.click();
-                
-                btn.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg> Save Artifact`;
-                btn.disabled = false;
-            }).catch(err => {
-                btn.innerHTML = `FAIL`;
-                btn.disabled = false;
-            });
-        }
-
         function updateClock() {
             const now = new Date();
             const ts = now.toLocaleTimeString('en-IN', { timeZone: 'Asia/Kolkata', hour12: true, hour: '2-digit', minute: '2-digit', second: '2-digit' });
             const parts = ts.split(' ');
             document.getElementById('live-clock').innerHTML = `${parts[0]} <span class="text-emerald-500 text-xl">${parts[1]}</span>`;
             document.getElementById('card-clock').innerHTML = `${parts[0]} <span class="text-sm">${parts[1]}</span>`;
-            if (!isMan
+            
+            // SECURITY: Only auto-sync if manual override is NOT active
+            if (!isManual) {
+                sync();
+            }
+        }
+
+        function sync() {
+            const now = new Date();
+            const dayMap = ["SUN", "MON", "TUE", "WED", "THU", "FRI", "SAT"];
+            const curDay = dayMap[now.getDay()];
+            const curMin = now.getHours() * 60 + now.getMinutes();
+
+            selectedDay = schedule[curDay] ? curDay : "MON";
+            dayEl.value = selectedDay;
+
+            const slotIdx = slots.findIndex(s => curMin >= s.sMin && curMin < s.eMin);
+            if (slotIdx !== -1) {
+                const dayData = schedule[selectedDay];
+                const teacherCode = dayData[slotIdx];
+                const teacherObj = teachers.find(t => t.id === teacherCode);
+                
+                let f = slotIdx, l = slotIdx;
+                while (f > 0 && dayData[f-1] === teacherCode) f--;
+                while (l < slots.length - 1 && dayData[l+1] === teacherCode) l++;
+
+                selectedLecture = {
+                    num: slots[slotIdx].name.split(' ')[1] || 'LB',
+                    start: slots[f].start,
+                    end: slots[l].end
+                };
+                
+                selectedTeacher = teacherObj ? teacherObj.name : 'UNIDENTIFIED';
+                teacherEl.value = selectedTeacher;
+                slotEl.value = slotIdx;
+            }
+            updateCard();
+        }
+
+        function toggleStudent(name, btn) {
+            const isPresent = presentStudents.includes(name);
+            if (isPresent) {
+                presentStudents = presentStudents.filter(s => s !== name);
+                btn.className = "student-btn flex items-center justify-between px-4 py-3 rounded-2xl border transition-all duration-300 bg-slate-950 border-white/5 text-slate-500 hover:border-emerald-500/30";
+                btn.querySelector('.dot').innerHTML = '';
+            } else {
+                presentStudents.push(name);
+                btn.className = "student-btn flex items-center justify-between px-4 py-3 rounded-2xl border transition-all duration-300 bg-emerald-500 border-emerald-4
